@@ -5,14 +5,13 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,16 +31,15 @@ import co.kr.lim.config.WebInitializer;
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextHierarchy(@ContextConfiguration)
 //@Import({ApplicationConfig.class, WebInitializer.class})
-//@ContextConfiguration(classes = {WebInitializer.class, ApplicationConfig.class} )
-@ContextConfiguration(classes = { ApplicationConfig.class })
-//@WebAppConfiguration
-//@Transactional
+@ContextConfiguration(classes = {WebInitializer.class, ApplicationConfig.class} )
+//@ContextConfiguration(classes = { ApplicationConfig.class })
+@WebAppConfiguration
+@Transactional
 public class MemberControllerTest {
 	
 	@Autowired
 	WebApplicationContext wac;
 
-	@Autowired
 	ObjectMapper objectMapper;
 
 	MockMvc mockMvc;
@@ -52,6 +50,7 @@ public class MemberControllerTest {
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+		objectMapper = new ObjectMapper();
 	}
 	
 	@Test
@@ -63,10 +62,10 @@ public class MemberControllerTest {
 
 		result.andDo(print());
 		result.andExpect(status().isCreated());
-		result.andExpect((ResultMatcher) jsonPath("$.username", is("whiteship")));
+		result.andExpect((ResultMatcher) jsonPath("$.username", is("limyoungjin")));
 		
 
-		result = mockMvc.perform(post("/accounts").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(createDto)));
+		result = mockMvc.perform(post("/member").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(createDto)));
 
 		result.andDo(print());
 		result.andExpect(status().isBadRequest());
@@ -76,7 +75,7 @@ public class MemberControllerTest {
 	
 	private MemberDto.Create memberCreateDto() {
 		MemberDto.Create dto = new MemberDto.Create();
-		dto.setUsername("youngjin");
+		dto.setUsername("limyoungjin");
 		dto.setPassword("password");
 		return dto;
 	}

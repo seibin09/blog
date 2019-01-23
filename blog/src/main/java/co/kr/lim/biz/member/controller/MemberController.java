@@ -23,9 +23,6 @@ public class MemberController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-    @Value("${jdbc.url}")
-    private String url;
-	
 	@RequestMapping(value="member", method = RequestMethod.POST)
 	public ResponseEntity createMember(@RequestBody @Valid MemberDto.Create create,  BindingResult result) {
 		if(result.hasErrors()) {

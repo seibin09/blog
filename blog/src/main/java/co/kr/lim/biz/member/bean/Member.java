@@ -6,7 +6,10 @@ import javax.persistence.*;
 
 import org.springframework.data.annotation.Id;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Member {
 	@Id
 	@GeneratedValue

@@ -6,4 +6,5 @@ import co.kr.lim.biz.member.bean.Member;
 
 public interface MemberDao extends JpaRepository<Member, Long>{
 
+	
 }

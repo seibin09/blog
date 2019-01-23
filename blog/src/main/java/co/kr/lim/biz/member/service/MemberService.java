@@ -5,7 +5,7 @@ import co.kr.lim.biz.member.bean.MemberDto;
 
 public interface MemberService {
 	
-	public Member memberCreate(MemberDto.create create);
+	public Member memberCreate(MemberDto.Create create);
 	
 
 }

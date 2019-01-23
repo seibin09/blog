@@ -15,13 +15,14 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private ModelMapper modelMapper;
 	
-	@Autowired
-	private MemberDao memberDao = null;
+//	@Autowired
+//	private MemberDao memberDao;
 	
 	@Override
-	public Member memberCreate(MemberDto.create create) {
-		Member member =  modelMapper.map(create, Member.class);
-		return memberDao.save(member);
+	public Member memberCreate(MemberDto.Create create) {
+//		Member member =  modelMapper.map(create, Member.class);
+//		return memberDao.save(member);
+		return null;
 	}
 
 }

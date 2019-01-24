@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.kr.lim.biz.member.bean.Member;
 import co.kr.lim.biz.member.bean.MemberDto;
 import co.kr.lim.config.ApplicationConfig;
 import co.kr.lim.config.WebInitializer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {/*WebInitializer.class, */ApplicationConfig.class} )
+@WebAppConfiguration
 @Transactional
 public class MemberControllerTest {
 	
@@ -41,6 +44,9 @@ public class MemberControllerTest {
 	
 	@Autowired
 	ObjectMapper objectMapper;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	MockMvc mockMvc;
 
@@ -60,7 +66,7 @@ public class MemberControllerTest {
 		MemberDto.Create createDto = memberCreateDto();
 
 		ResultActions result = mockMvc
-				.perform(post("/member").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(createDto)));
+				.perform(post("/member").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(createDto)));
 
 		result.andDo(print());
 		result.andExpect(status().isCreated());
@@ -79,5 +85,13 @@ public class MemberControllerTest {
 		dto.setUsername("limyoungjin");
 		dto.setPassword("password");
 		return dto;
+	}
+	@Test
+	public void test() {
+//		logger.debug("test");
+		Member member = new Member();
+		MemberDto.Create dto = memberCreateDto();
+		modelMapper.map(dto, member);
+		
 	}
 }

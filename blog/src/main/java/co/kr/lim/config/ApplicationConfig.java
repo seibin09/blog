@@ -21,6 +21,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.kr.lim.common.interceptor.CommonInterceptor;
+
 @Configuration
 @EnableWebMvc
 @WebAppConfiguration
@@ -69,7 +71,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
     
     @Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		super.addInterceptors(registry);
+    	registry.addInterceptor(new CommonInterceptor());
 	}
 
 	@Bean

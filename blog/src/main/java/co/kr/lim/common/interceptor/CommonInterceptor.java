@@ -9,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
-public class CommonInterCeptor extends HandlerInterceptorAdapter {
+public class CommonInterceptor extends HandlerInterceptorAdapter {
 	
-	private static Logger logger = LoggerFactory.getLogger(CommonInterCeptor.class);
+	private static Logger logger = LoggerFactory.getLogger(CommonInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

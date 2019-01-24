@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,10 +21,11 @@ public class MemberController {
 
 	@Autowired
 	private ModelMapper modelMapper;
-	
-	@RequestMapping(value="member", method = RequestMethod.POST)
-	public ResponseEntity createMember(@RequestBody @Valid MemberDto.Create create,  BindingResult result) {
-		if(result.hasErrors()) {
+
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/aa", method = RequestMethod.POST, headers = { "context-type=application/json" })
+	public ResponseEntity createMember(@RequestBody @Valid MemberDto.Create create, BindingResult result) {
+		if (result.hasErrors()) {
 			ErrorResponse errorResponse = new ErrorResponse();
 			errorResponse.setMessage("잘못된 요청입니다.");
 			errorResponse.setCode("bad.request");
@@ -33,8 +33,8 @@ public class MemberController {
 			return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 		}
 		Member member = new Member();
-		
+
 		return new ResponseEntity<>(modelMapper.map(member, MemberDto.Create.class), HttpStatus.CREATED);
 	}
-	
+
 }

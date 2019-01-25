@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.kr.lim.MemberControllerTest;
 import co.kr.lim.biz.member.bean.Member;
 import co.kr.lim.biz.member.bean.MemberDto;
+import co.kr.lim.biz.member.service.MemberService;
 import co.kr.lim.common.ErrorResponse;
 
 @RestController
@@ -25,6 +26,9 @@ public class MemberController {
 
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	private static Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -38,7 +42,7 @@ public class MemberController {
 			// TODO BindingResult 안에 들어있는 에러 정보 사용하기.
 			return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 		}
-//		Member member = new Member();
+//		memberService.memberCreate(create);
 
 		return new ResponseEntity<>(modelMapper.map(create, Member.class), HttpStatus.CREATED);
 	}

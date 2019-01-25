@@ -1,14 +1,16 @@
 package co.kr.lim;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,6 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,12 +32,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import co.kr.lim.biz.member.bean.Member;
 import co.kr.lim.biz.member.bean.MemberDto;
 import co.kr.lim.config.ApplicationConfig;
-import co.kr.lim.config.WebInitializer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {/*WebInitializer.class, */ApplicationConfig.class} )
 @WebAppConfiguration
 @Transactional
+
+@FixMethodOrder(MethodSorters.JVM)
 public class MemberControllerTest {
 	
 	@Autowired
@@ -70,7 +72,7 @@ public class MemberControllerTest {
 
 		result.andDo(print());
 		result.andExpect(status().isCreated());
-		result.andExpect((ResultMatcher) jsonPath("$.username", is("limyoungjin")));
+		result.andExpect(jsonPath("$.username", is("limyoungjin")));
 		
 
 		result = mockMvc.perform(post("/member").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(createDto)));

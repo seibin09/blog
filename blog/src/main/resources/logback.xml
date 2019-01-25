@@ -54,13 +54,17 @@
         </encoder>
     </appender>
         
-    <!-- 이 아래에 있는 애들 다 log로 찍겠다. -->
     <logger name="co.kr.lim" level="debug">
         <appender-ref ref="fileForLoginInterceptor"/>
     </logger>
     
-    <!-- 이 아래에 있는 애들 다 log로 찍겠다. -->
     <logger name="org.springframework" level="debug" />
+    <root level="info">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+    
+    <logger name="org.hibernate" level="debug" />
     <root level="info">
         <appender-ref ref="console" />
         <appender-ref ref="file" />

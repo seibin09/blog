@@ -37,8 +37,6 @@ import co.kr.lim.config.ApplicationConfig;
 @ContextConfiguration(classes = {/*WebInitializer.class, */ApplicationConfig.class} )
 @WebAppConfiguration
 @Transactional
-
-@FixMethodOrder(MethodSorters.JVM)
 public class MemberControllerTest {
 	
 	@Autowired

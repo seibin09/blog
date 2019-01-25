@@ -14,11 +14,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.5.RELEASE</spring.version>
-		<spring.jpa.version>1.4.1.RELEASE</spring.jpa.version>
+		<spring.jpa.version>1.9.4.RELEASE</spring.jpa.version>
 		<postgresql.version>42.2.5</postgresql.version>
 		<java.version>1.8</java.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<hibernate.version>4.0.1.Final</hibernate.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -44,6 +44,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>

@@ -80,7 +80,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
 		return properties;
 	}
 
-//	@Bean
+//	@Bean 하이버네이트 트랜잭션으로 등록할경우 실패함
 //	public PlatformTransactionManager transactionManager() {
 //		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 //		transactionManager.setDataSource(dataSource());

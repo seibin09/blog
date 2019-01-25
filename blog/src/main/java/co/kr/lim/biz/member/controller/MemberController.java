@@ -20,8 +20,10 @@ import co.kr.lim.biz.member.bean.Member;
 import co.kr.lim.biz.member.bean.MemberDto;
 import co.kr.lim.biz.member.service.MemberService;
 import co.kr.lim.common.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@Slf4j
 public class MemberController {
 
 	@Autowired
@@ -30,20 +32,18 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	private static Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/member", method = RequestMethod.POST, headers = { "Content-Type=application/json" })
 	public ResponseEntity createMember(@RequestBody @Valid MemberDto.Create create, BindingResult result) {
 		if (result.hasErrors()) {
+			log.debug("BindingResult Fail");
 			ErrorResponse errorResponse = new ErrorResponse();
 			errorResponse.setMessage("잘못된 요청입니다.");
 			errorResponse.setCode("bad.request");
 			// TODO BindingResult 안에 들어있는 에러 정보 사용하기.
 			return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 		}
-//		memberService.memberCreate(create);
-
+		memberService.memberCreate(create);
 		return new ResponseEntity<>(modelMapper.map(create, Member.class), HttpStatus.CREATED);
 	}
 }

@@ -20,18 +20,17 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private ModelMapper modelMapper;
 	
-//	@Autowired
-//	private MemberRepository memberRepository;
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	@Override
 	public Member memberCreate(MemberDto.Create create) {
-//		Member member =  modelMapper.map(create, Member.class);
-//		if(memberRepository.findByUsername(create.getUsername()) == null) {
-//			logger.info("duplication Exception username = [{}]", create.getUsername());
-//			throw new UserDuplicatedException(create.getUsername());
-//		}
-//		return memberRepository.save(member);
-		return null;
+		Member member =  modelMapper.map(create, Member.class);
+		if(memberRepository.findByUsername(create.getUsername()) != null) {
+			logger.info("duplication Exception username = [{}]", create.getUsername());
+			throw new UserDuplicatedException(create.getUsername());
+		}
+		return memberRepository.save(member);
 	}
 
 }

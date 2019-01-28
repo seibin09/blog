@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 		Member member =  modelMapper.map(create, Member.class);
 		if(memberRepository.findByUsername(create.getUsername()) != null) {
 			logger.info("duplication Exception username = [{}]", create.getUsername());
-			throw new UserDuplicatedException(create.getUsername());
+			throw new UserDuplicatedException("testException", "100");
 		}
 		return memberRepository.save(member);
 	}

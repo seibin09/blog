@@ -1,18 +1,12 @@
 package co.kr.lim.common.exception;
 
-public class UserDuplicatedException extends RuntimeException{
+public class UserDuplicatedException extends BaseException{
 
 	private static final long serialVersionUID = -6052941085304458496L;
 
-	private String username;
 
-	public UserDuplicatedException(String username) {
-		this.username = username;
+	public UserDuplicatedException(String message, String code) {
+		super(message, code);
 	}
-	
-	public String getUsername() {
-		return username;
-	}
-	
 	
 }

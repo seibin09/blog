@@ -34,7 +34,7 @@ import co.kr.lim.common.interceptor.CommonInterceptor;
 @EnableWebMvc
 @WebAppConfiguration
 @ComponentScan(basePackages = "co.kr.lim")
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:properties/application.properties")
 @EnableJpaRepositories(basePackages = "co.kr.lim")
 @EnableTransactionManagement
 public class ApplicationConfig extends WebMvcConfigurerAdapter {

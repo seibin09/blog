@@ -46,4 +46,12 @@ public class MemberController {
 		return new ResponseEntity<>(modelMapper.map(create, Member.class), HttpStatus.CREATED);
 	}
 	
+	@ExceptionHandler(UserDuplicatedException.class)
+	@ResponseStatus(HttpStatus.CONFLICT)
+	public ErrorResponse handleUserDuplicatedException(UserDuplicatedException e) {
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setMessage("[" + e.getMessage() + "] 중복된 username 입니다.");
+		return errorResponse;
+	}
+	
 }

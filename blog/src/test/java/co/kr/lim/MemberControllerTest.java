@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -88,10 +89,9 @@ public class MemberControllerTest {
 	}
 	@Test
 	public void test() {
-//		logger.debug("test");
-		Member member = new Member();
-		MemberDto.Create dto = memberCreateDto();
-		modelMapper.map(dto, member);
-		
+//		ApplicationContext applicationContext;
+//		applicationContext.getMessage(code, args, locale);
 	}
+	
+	
 }
